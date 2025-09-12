@@ -1,0 +1,30 @@
+seed: 42
+experiment_name: "spamshield_baseline"
+paths:
+  train_csv: "data/raw/train.csv"
+  test_csv: "data/raw/test.csv"
+  processed_dir: "data/processed"
+  artifact_dir: "models/artifacts"
+  pipeline_name: "spamshield_tfidf.joblib"
+
+model:
+  vectorizer:
+    min_df: 2
+    max_df: 0.9
+    ngram_range: [1, 2]
+    max_features: 20000
+    strip_accents: "unicode"
+    lowercase: true
+    stop_words: "english"
+  classifier:
+    type: "logreg"
+    C: 2.0
+
+training:
+  test_size: 0.2
+  stratify: true
+  n_jobs: -1
+  verbose: 1
+
+metrics:
+  average: "weighted"
